@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <title>ARB05_flexible-blade08</title>
+    <meta name="generator" content="wxMaxima"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <script type="text/x-mathjax-config">  MathJax.Hub.Config({
+    displayAlign: "left",
+    context: "MathJax",
+    TeX: {TagSide: "left"}
+  })
+</script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js" async="async">  // A comment that hinders wxWidgets from optimizing this tag too much.
+</script>
+    <link rel="stylesheet" type="text/css" href="ARB05_flexible-blade08_htmlimg/ARB05_flexible-blade08.css"/>
+  </head>
+  <body>
+    <!-- ****************************************************** -->
+    <!-- *        Created with wxMaxima version 21.05.2       * -->
+    <!-- ****************************************************** -->
+    <noscript>
+      <div class="error message">
+        <p>Please enable JavaScript in order to get a 2d display of the equations embedded in this web page.</p>
+      </div>
+    </noscript>
+    <p hidden="hidden">\(      \DeclareMathOperator{\abs}{abs}
+      \newcommand{\ensuremath}[1]{\mbox{$#1$}}
+\)</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i1)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_function">kill</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">all</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <!-- Title cell -->
+    <div class="title">
+      <p>Rear anti-roll bar structural model
+</p>
+    </div>
+    <!-- Text cell -->
+    <div class="comment">Material and geometry data of the structure
+</div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i5)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">ni</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">D</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">30</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">d</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">27</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">A</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">d</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">4</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">J</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">d</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">64</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">F</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">4300</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">a</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">80</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">b</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">155</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">F</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">material_data_36NiCrMo16</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">205000</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ni</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">29</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">material_data_Ti6Al4V</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">114000</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ni</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">33</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">data_36NiCrMo16</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">material_data_36NiCrMo16</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">data_Ti6Al4V</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">material_data_Ti6Al4V</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Section cell -->
+    <div class="section">
+      <p>  1 Case of a perfectly rigid blade
+</p>
+    </div>
+    <!-- Image cell -->
+    <div class="image">Figure 1: simplified model of the anti-roll bar with a perfectly rigid blade (not represented).
+
+      <br/>
+      <img src="ARB05_flexible-blade08_htmlimg/ARB05_flexible-blade08_2.png" alt="Diagram" style="max-width:90%;" loading="lazy"/>
+    </div>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  1.1 Global equilibrium equations
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i8)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">EqRotB</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">M_A</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">M_B</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">M_D</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">EqTrasl</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">F_B</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">equilibrium_eqns</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">linsolve</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">EqRotB</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">EqTrasl</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">F_B</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">globalSolve</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">true</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}2 {F_A} a+{M_t}+{M_D}+{M_B}+{M_A}=0\]
+</p>
+    <p>\[\operatorname{	}{F_B}+{F_A}=0\]
+</p>
+    <p>\[\operatorname{	}\left[ {F_A}=-\frac{{M_t}+{M_D}+{M_B}+{M_A}}{2 a}\operatorname{,}{F_B}=\frac{{M_t}+{M_D}+{M_B}+{M_A}}{2 a}\right] \]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  1.2 Internal actions
+</p>
+    </div>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.2.1 AD segment
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i11)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">N_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">T_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">M_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">M_A</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <p>\[\operatorname{	}{F_A}\]
+</p>
+    <p>\[\operatorname{	}{F_A} z+{M_A}\]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.2.2 BD segment
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i14)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">N_BD</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">T_BD</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">F_B</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">M_BD</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">M_B</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">F_B</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <p>\[\operatorname{	}{F_B}\]
+</p>
+    <p>\[\operatorname{	}{F_B} z-{M_B}\]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  1.3 Second castigliano theorem
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt"> --&gt;	
+  </span>
+        </td>
+        <td>
+          <span class="input"/>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ {F_A}=-\frac{{M_t}+{M_D}+{M_B}+{M_A}}{2 a}\operatorname{,}{F_B}=\frac{{M_t}+{M_D}+{M_B}+{M_A}}{2 a}\right] \]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.3.1 Strain energies
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i15)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">U_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">integrate</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">M_AD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">J</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">T_AD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{A {{{F_A}}^{2}} G {{a}^{3}}+3 A {F_A} G {M_A} {{a}^{2}}+\left( 3 A G {{{M_A}}^{2}}+3 E {{{F_A}}^{2}} J\right)  a}{6 A E G J}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i16)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">U_BD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">integrate</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">M_BD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">J</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">T_BD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">A</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{A {{{F_B}}^{2}} G {{a}^{3}}-3 A {F_B} G {M_B} {{a}^{2}}+\left( 3 A G {{{M_B}}^{2}}+3 E {{{F_B}}^{2}} J\right)  a}{6 A E G J}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i17)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">U_tot</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">U_AD</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">U_BD</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{A {{{F_B}}^{2}} G {{a}^{3}}-3 A {F_B} G {M_B} {{a}^{2}}+\left( 3 A G {{{M_B}}^{2}}+3 E {{{F_B}}^{2}} J\right)  a}{6 A E G J}+\frac{A {{{F_A}}^{2}} G {{a}^{3}}+3 A {F_A} G {M_A} {{a}^{2}}+\left( 3 A G {{{M_A}}^{2}}+3 E {{{F_A}}^{2}} J\right)  a}{6 A E G J}\]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.3.2 Reaction forces
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i18)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotA</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_A</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{3 A {F_A} G {{a}^{2}}+6 A G {M_A} a}{6 A E G J}=0\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i19)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotB</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_B</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{6 A G {M_B} a-3 A {F_B} G {{a}^{2}}}{6 A E G J}=0\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i20)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">reactionForces</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">linsolve</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">EqRotB</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">EqTrasl</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">RotA</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">RotB</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">F_A</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">F_B</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_A</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_B</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">globalSolve</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">true</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ {F_A}=-\frac{{M_t}+{M_D}}{a}\operatorname{,}{F_B}=\frac{{M_t}+{M_D}}{a}\operatorname{,}{M_A}=\frac{{M_t}+{M_D}}{2}\operatorname{,}{M_B}=\frac{{M_t}+{M_D}}{2}\right] \]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.3.3 Total strain energy
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i21)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">U_tot</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">reactionForces</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{\left( \frac{3 E J {{\left( {M_t}+{M_D}\right) }^{2}}}{{{a}^{2}}}+\frac{3 A G {{\left( {M_t}+{M_D}\right) }^{2}}}{4}\right)  a-\frac{A G {{\left( {M_t}+{M_D}\right) }^{2}} a}{2}}{3 A E G J}\]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.3.4 Rotations
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i22)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_D</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{\left( \frac{6 E J\, \left( {M_t}+{M_D}\right) }{{{a}^{2}}}+\frac{3 A G\, \left( {M_t}+{M_D}\right) }{2}\right)  a-A G\, \left( {M_t}+{M_D}\right)  a}{3 A E G J}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i23)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">RotD</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_D</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{\left( \frac{6 E J {M_t}}{{{a}^{2}}}+\frac{3 A G {M_t}}{2}\right)  a-A G {M_t} a}{3 A E G J}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i24)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">DeltaRotCD</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">32</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">b</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">d</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">4</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{32 {M_t} b}{\ensuremath{\pi}  G\, \left( {{D}^{4}}-{{d}^{4}}\right) }\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i25)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotC</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">RotD</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">DeltaRotCD</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{32 {M_t} b}{\ensuremath{\pi}  G\, \left( {{D}^{4}}-{{d}^{4}}\right) }+\frac{\left( \frac{6 E J {M_t}}{{{a}^{2}}}+\frac{3 A G {M_t}}{2}\right)  a-A G {M_t} a}{3 A E G J}\]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  1.4 Torsional stiffness
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i26)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotC</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">RotC</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">RotC</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_Ti6Al4V</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_Ti6Al4V</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ \frac{0.1695213099634685}{\ensuremath{\pi} }\operatorname{,}\frac{0.3137201198087342}{\ensuremath{\pi} }\right] \]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i27)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotCdeg</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">RotC</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">180</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ 3.091697960057687\operatorname{,}5.721568896858654\right] \]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i28)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">K_t</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">RotCdeg</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">1000</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+            <span class="code_comment">/* [N*m/deg]*/</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ \left[ 222.5314402921697\operatorname{,}120.2467386834644\right] \right] \]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  1.5 Structural stress validation
+</p>
+    </div>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.5.1 Horizontal bar (bending)
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i29)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">sigma_z_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">M_AD</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">J</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{D\, \left( {F_A} z+{M_A}\right) }{J}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i30)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">sigma_z_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">sigma_z_AD</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">reactionForces</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{640 \left( \frac{{M_t}+{M_D}}{2}-\frac{\left( {M_t}+{M_D}\right)  z}{a}\right) }{92853 \ensuremath{\pi} }\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i31)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">tau_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">T_AD</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">A</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{{F_A}}{A}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i32)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">tau_AD</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">tau_AD</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">reactionForces</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}-\frac{4 \left( {M_t}+{M_D}\right) }{171 \ensuremath{\pi}  a}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i33)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">eq_stress</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">sqrt</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">sigma_z_AD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">tau_AD</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\sqrt{\frac{409600 {{\left( \frac{{M_t}+{M_D}}{2}-\frac{\left( {M_t}+{M_D}\right)  z}{a}\right) }^{2}}}{8621679609 {{\ensuremath{\pi} }^{2}}}+\frac{16 {{\left( {M_t}+{M_D}\right) }^{2}}}{9747 {{\ensuremath{\pi} }^{2}} {{a}^{2}}}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i34)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">eq_stress</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">eq_stress</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">M_D</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}{{\left( 4.813581425199253 {{10}^{-6}} {{\left( 1.0 F a-0.025 F a z\right) }^{2}}+1.039511476786065 {{10}^{-7}} {{F}^{2}} {{a}^{2}}\right) }^{0.5}}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i35)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">critical_section</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">linsolve</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">eq_stress</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ratprint</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">globalSolve</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">true</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ z=40\right] \]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i36)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">min_eq_stress</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">eq_stress</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">critical_section</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}110.9106082018108\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i37)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">max_eq_stress</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">eq_stress</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">80</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}762.8375544924845\]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  1.5.2 Vertical bar
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i38)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">max_tau</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">16</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">D</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">d</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{16 {M_t}}{\ensuremath{\pi}  \left( {{D}^{3}}-{{d}^{3}}\right) }\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i39)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">max_tau</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">max_tau</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">common_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">reactionForces</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}478.8786698252245\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i40)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">max_eq_stress_torsion</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">sqrt</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">max_tau</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}829.4421867982899\]
+</p>
+    <!-- Section cell -->
+    <div class="section">
+      <p>  2 Case of a flexible blade
+</p>
+    </div>
+    <!-- Image cell -->
+    <div class="image">Figure 2:simplified model of the anti-roll bar blade, locked onto the rest of the structure.
+      <br/>The blade shape is simplified to a double truncated pyramid with a prismatic base.
+
+      <br/>
+      <img src="ARB05_flexible-blade08_htmlimg/ARB05_flexible-blade08_39.png" alt="Diagram" style="max-width:90%;" loading="lazy"/>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i42)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">1</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">ni</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">s_EC_linear</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">+</span>
+            <span class="code_number">11</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">47</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">s_EC_constant</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">22</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">A_EC_linear</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">s_EC_linear</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">B</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">A_EC_constant</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">s_EC_constant</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">B</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">J_EC_linear</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">s_EC_linear</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">12</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">J_EC_constant</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">s_EC_constant</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">B</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">3</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">12</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">F</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">4300</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">a</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">80</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">B</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">5</span>
+            <span class="code_endofline">.</span>
+            <span class="code_number">6</span>
+            <span class="code_endofline">,</span>
+            <span class="code_endofline">
+              <br/>
+            </span>    
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">=</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">F</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">material_data_36NiCrMo16</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  2.1 Internal actions
+</p>
+    </div>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  2.1.1 EC segment
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i45)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">N_EC</span>
+            <span class="code_operator">:</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">T_EC</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">M_EC</span>
+            <span class="code_operator">:</span>
+            <span class="code_operator">−</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0\]
+</p>
+    <p>\[\operatorname{	}-{F_E}\]
+</p>
+    <p>\[\operatorname{	}-{F_E} z\]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  2.2 Second Castigliano theorem
+</p>
+    </div>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  2.2.1 Strain energies
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i48)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">dU_EC_linear</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">M_EC</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">J_EC_linear</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">T_EC</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">A_EC_linear</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">assume</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">U_EC_linear</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">integrate</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">dU_EC_linear</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">0</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">47</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ratprint</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{235 \log{(22)} {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}}{308 E}-\frac{235 \log{(11)} {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}}{308 E}+\frac{38933625 \log{(94)} {{{F_E}}^{2}}}{120736 E}-\frac{38933625 \log{(47)} {{{F_E}}^{2}}}{120736 E}+\frac{235 \log{(22)} {{{F_E}}^{2}}}{308 E}-\frac{235 \log{(11)} {{{F_E}}^{2}}}{308 E}-\frac{38933625 {{{F_E}}^{2}}}{241472 E}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i51)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">dU_EC_constant</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">M_EC</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">E</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">J_EC_constant</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">T_EC</span>
+            <span class="code_operator">^</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">/</span>
+            <span class="code_operator">(</span>
+            <span class="code_number">2</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">G</span>
+            <span class="code_operator">·</span>
+            <span class="code_variable">A_EC_constant</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">assume</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">a</span>
+            <span class="code_endofline">&gt;</span>
+            <span class="code_number">0</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">$</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_variable">U_EC_constant</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">integrate</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">dU_EC_constant</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">z</span>
+            <span class="code_endofline">,</span>
+            <span class="code_number">47</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">a</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">ratprint</span>
+            <span class="code_operator">=</span>
+            <span class="code_function">false</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{1960 {{{F_E}}^{2}} a\, \ensuremath{\mathrm{ni}}+125 {{{F_E}}^{2}} {{a}^{3}}+1960 {{{F_E}}^{2}} a}{241472 E}-\frac{92120 {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}+13069995 {{{F_E}}^{2}}}{241472 E}\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i55)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">U_tot_blade</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">U_EC_linear</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">U_EC_constant</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_EC_constant</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">F</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_EC_linear</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">F</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+            <span class="code_endofline">
+              <br/>
+            </span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot_blade</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">F</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{1960 {{{F_E}}^{2}} a\, \ensuremath{\mathrm{ni}}+125 {{{F_E}}^{2}} {{a}^{3}}+1960 {{{F_E}}^{2}} a}{241472 E}-\frac{92120 {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}+13069995 {{{F_E}}^{2}}}{241472 E}+\frac{235 \log{(22)} {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}}{308 E}-\frac{235 \log{(11)} {{{F_E}}^{2}} \ensuremath{\mathrm{ni}}}{308 E}+\frac{38933625 \log{(94)} {{{F_E}}^{2}}}{120736 E}-\frac{38933625 \log{(47)} {{{F_E}}^{2}}}{120736 E}+\frac{235 \log{(22)} {{{F_E}}^{2}}}{308 E}-\frac{235 \log{(11)} {{{F_E}}^{2}}}{308 E}-\frac{38933625 {{{F_E}}^{2}}}{241472 E}\]
+</p>
+    <p>\[\operatorname{	}19089.05552202588\]
+</p>
+    <p>\[\operatorname{	}5679.246165409794\]
+</p>
+    <p>\[\operatorname{	}24768.30168743568\]
+</p>
+    <!-- Subsubsection cell -->
+    <div class="subsubsect">
+      <p>  2.2.2 Displacements
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i56)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">DispE</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">diff</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">U_tot_blade</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\frac{3920 {F_E} a\, \ensuremath{\mathrm{ni}}+250 {F_E} {{a}^{3}}+3920 {F_E} a}{241472 E}-\frac{184240 {F_E} \ensuremath{\mathrm{ni}}+26139990 {F_E}}{241472 E}+\frac{235 \log{(22)} {F_E} \ensuremath{\mathrm{ni}}}{154 E}-\frac{235 \log{(11)} {F_E} \ensuremath{\mathrm{ni}}}{154 E}+\frac{38933625 \log{(94)} {F_E}}{60368 E}-\frac{38933625 \log{(47)} {F_E}}{60368 E}+\frac{235 \log{(22)} {F_E}}{154 E}-\frac{235 \log{(11)} {F_E}}{154 E}-\frac{38933625 {F_E}}{120736 E}\]
+</p>
+    <!-- Subsection cell -->
+    <div class="subsect">
+      <p>  2.3 Torsional stiffness
+</p>
+    </div>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i57)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">DispE</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">DispE</span>
+            <span class="code_endofline">,</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">F_E</span>
+            <span class="code_operator">=</span>
+            <span class="code_variable">F</span>
+            <span class="code_operator">]</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}11.52014031973752\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i58)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotBlade</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">atan</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_variable">DispE</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">a</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">data_36NiCrMo16_blade</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}0.1430185933290303\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i59)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">RotBladeDeg</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">RotBlade</span>
+            <span class="code_operator">·</span>
+            <span class="code_number">180</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">%pi</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}8.194361789651309\]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i60)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">TotalRotation</span>
+            <span class="code_operator">:</span>
+            <span class="code_variable">RotBladeDeg</span>
+            <span class="code_operator">+</span>
+            <span class="code_variable">RotCdeg</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ 11.286059749709\operatorname{,}13.91593068650996\right] \]
+</p>
+    <!-- Code cell -->
+    <table>
+      <tr>
+        <td>
+          <span class="prompt">(%i61)	
+  </span>
+        </td>
+        <td>
+          <span class="input">
+            <span class="code_variable">K_t_withFlexBlade</span>
+            <span class="code_operator">:</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_function">ev</span>
+            <span class="code_operator">(</span>
+            <span class="code_operator">[</span>
+            <span class="code_variable">M_t</span>
+            <span class="code_operator">/</span>
+            <span class="code_variable">TotalRotation</span>
+            <span class="code_operator">]</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">blade_data</span>
+            <span class="code_operator">)</span>
+            <span class="code_operator">/</span>
+            <span class="code_number">1000</span>
+            <span class="code_endofline">,</span>
+            <span class="code_variable">numer</span>
+            <span class="code_endofline">;</span>
+          </span>
+        </td>
+      </tr>
+    </table>
+    <p>\[\operatorname{	}\left[ \left[ 60.96015928125312\operatorname{,}49.43974035936697\right] \right] \]
+</p>
+    <hr/>
+    <p>
+      <small> Created with 
+        <a href="https://wxMaxima-developers.github.io/wxmaxima/">wxMaxima</a>.</small>
+    </p>
+    <small> The source of this Maxima session can be downloaded 
+      <a href="ARB05_flexible-blade08_htmlimg/ARB05_flexible-blade08.wxmx">here</a>.</small>
+  </body>
+</html>
